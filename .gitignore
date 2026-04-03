@@ -1,0 +1,57 @@
+# =========================
+# 🔥 C 빌드 결과물
+# =========================
+a.out
+main
+*.out
+*.exe
+*.elf
+
+# 오브젝트 파일
+*.o
+*.obj
+
+# 라이브러리
+*.a
+*.so
+*.so.*
+*.dll
+
+# 디버그 파일
+*.dSYM/
+*.su
+*.idb
+*.pdb
+
+# =========================
+# 🧠 CMake (혹시 사용할 경우)
+# =========================
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+
+# =========================
+# 🟦 VSCode 설정
+# =========================
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# =========================
+# 🐧 Linux 임시 파일
+# =========================
+*~
+*.swp
+*.swo
+
+# =========================
+# 📦 기타
+# =========================
+*.log
+*.zip
+*.tar
+*.tar.gz
+*.rar
