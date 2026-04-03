@@ -90,7 +90,57 @@ int main()
 
 int insertSortedLL(LinkedList *ll, int item)
 {
-	/* add your code here */
+	// ll->head를 첫 노드로 설정 
+	ListNode* cur = ll->head;
+
+	// insertNode 함수에 넣어줄 index는 이 안에서 만들어서 증가시켜주는 것
+	int index = 0;
+	
+	// 리스트가 비어있다면 
+	if(ll->head == NULL)
+	{	
+		// 어떤 값이 들어오든 첫번째로 넣음
+		insertNode(ll, index, item);
+
+		return index;
+	}
+
+	// cur이 NULL이 아닐 동안(리스트가 끝나기 전까지 순회)
+	while(cur != NULL)
+	{
+		// 넣어야 할 item이 현재 보고 있는 노드의 item보다 작으면
+		if(item < cur->item)
+		{
+			// 현재 보고 있는 노드의 자리에 넣음
+			// insertNode 함수 내부에서 기존 노드를 새로 추가한 노드의 다음 노드로 연결하는 작업을 함 
+			insertNode(ll, index, item);
+			
+			// 요구사항: 삽입된 위치 반환 
+			return index;
+		}
+		// 요구사항: 원래 리스트 내에 있는 item을 입력하면 -1을 반환 
+		else if(item == cur->item)
+		{
+			return -1;
+		}
+		// 리스트가 끝나기 전까지 item을 넣을 자리를 못 찾았다면(= item을 리스트의 마지막으로 넣어야 한다면)
+		else if(cur->next == NULL)
+		{
+			// 마지막 노드로 추가(마지막 노드에 접근할 수 있을 만큼 index가 되지 않기 때문에 + 1 해줌)
+			insertNode(ll, index + 1, item);
+			
+			// 요구사항: 삽입된 위치 반환 
+			return index + 1;
+		}
+
+		// 다음 노드로 건너갈 때마다 index 값 증가
+		index++;
+
+		// 현재 보고 있는 노드를 다음 노드로 바꿔서 순회 
+		cur = cur->next;
+	}
+
+	return -1;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
