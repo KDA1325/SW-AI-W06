@@ -103,7 +103,34 @@ int main()
 
 void alternateMergeLinkedList(LinkedList *ll1, LinkedList *ll2)
 {
-    /* add your code here */
+	// ll1, ll2 두 리스트를 순회해야 하기 때문에 cur1, cur2 만들어줌
+    ListNode* cur1 = ll1->head;
+	ListNode* cur2 = ll2->head;
+
+	// ll2의 첫 노드는 ll1의 첫 노드 뒤로 들어가야 하기 때문에 index를 1부터 시작
+	int index = 1;
+
+	// ll1이 끝나면 ll2의 요소는 더이상 들어갈 수 없기 때문에 cur1이 NULL이 아닐 동안에만 순회
+	// ll2가 ll1보다 먼저 끝나면 cur2->item 접근에서 오류 발생하기 때문에 ll2가 끝나도 바로 종료
+	while(cur1 != NULL && cur2 != NULL)
+	{
+		// cur2의 item을 넣은 새 노드를 만들어 ll1의 index 위치에 넣음
+		// insertNode() 내에서 ll1의 index 위치에 있던 노드와 그 이후 노드들을 한 칸씩 뒤로 밂	
+		insertNode(ll1, index, cur2->item);
+	
+		// ll1으로 들어간 ll2의 요소를 삭제하기 전!!에 cur2를 다음 노드로 옮겨줌
+		// 먼저 안 옮기고 삭제하면 삭제한 노드를 바라보게 됨
+		cur2 = cur2->next;
+		
+		// ll2의 0번째 노드 값을 복사해서 ll1에 넣고 ll2의 0번째 노드(head)를 삭제하기 때문에 index를 0으로 넣음  
+		removeNode(ll2, 0);
+		
+		// cur1 다음에 새 노드가 삽입되기 때문에 추가된 ll2의 item이 아닌 원래 ll1의 노드만 순회하기 위해 다다음 노드를 바라보게 함
+		cur1 = cur1->next->next;
+
+		// 위와 같은 이유로 index도 2 증가
+		index += 2;
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
