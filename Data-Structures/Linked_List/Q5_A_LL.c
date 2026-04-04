@@ -41,6 +41,7 @@ int main()
 	int c, i;
 	LinkedList ll;
 	LinkedList resultFrontList, resultBackList;
+	c = 1;
 
 	//Initialize the linked list as an empty linked list
 	ll.head = NULL;
@@ -102,7 +103,38 @@ int main()
 
 void frontBackSplitLinkedList(LinkedList *ll, LinkedList *resultFrontList, LinkedList *resultBackList)
 {
-	/* add your code here */
+	ListNode* cur = ll->head;
+	
+	// 절반 개수를 저장할 변수 
+	int half = 0;
+
+	// 홀수면 남는 노드 1개를 앞에 추가해야 하기 때문에 홀수 판단을 위한 계산 필요
+	int oddCheck = (ll->size % 2);
+		
+	// 홀수면
+	if (oddCheck != 0)
+	{
+		// 하나 남은 노드를 앞에 추가
+		half = (ll->size / 2) + 1;
+	}
+	// 짝수
+	else{
+		half = (ll->size / 2);
+	}
+
+	// 0부터 half까지 순회하며 리스트 저장 
+	for(int i = 0; i < half; i++)
+	{
+		insertNode(resultFrontList, i, cur->item);
+		cur = cur->next;
+	}
+
+	// 0부터 ll->size - half만큼 순회하며 리스트 저장 
+	for(int j = 0; j < (ll->size - half); j++)
+	{
+		insertNode(resultBackList, j, cur->item);
+		cur = cur->next;
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
