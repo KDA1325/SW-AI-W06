@@ -113,15 +113,26 @@ int main()
 
 
 //////////////////////////////////////////////////////////////////////////////////
-
+// 연결 리스트의 데이터를 순서대로 큐에 넣기 
 void createQueueFromLinkedList(LinkedList *ll, Queue *q)
 {
-	/* add your code here */
+	ListNode* cur = ll->head;
+
+	// 함수 시작 시 큐가 안 비어 있으면 무조건 완전히 비우고 시작
+	removeAllItemsFromQueue(q);
+
+	while(cur != NULL)
+	{
+		// 큐에 데이터를 넣음
+		enqueue(q, cur->item);
+
+		cur = cur->next;
+	}
 }
 
 void removeOddValues(Queue *q)
 {
-	/* add your code here */
+	dequeue(q);
 }
 
 //////////////////////////////////////////////////////////////////////////////////
