@@ -87,7 +87,33 @@ int main()
 
 void RecursiveReverse(ListNode **ptrHead)
 {
-	/* add your code here */
+	// head를 first와 rest 두 덩어리로 나눠서 문제를 풀기
+	// first = 맨 앞 노드
+	ListNode* first = *ptrHead;
+	
+	if(*ptrHead == NULL || (*ptrHead)->next == NULL)
+	{
+		return;
+	}
+	
+	// rest = first의 다음부터 시작하는 나머지 리스트 
+	ListNode* rest = first->next;
+
+	// rest를 재귀적으로 뒤집음 
+	RecursiveReverse(&rest);
+
+	// first의 다음 노드가 다시 first를 가리키게 함
+	// -> 방향 반전 
+	first->next->next = first;
+
+	// first의 연결 끊기 
+	// -> 반전시키고 원래의 순서대로 연결되어 있는 연결을 끊어줌 
+	first->next = NULL;
+
+	// head를 rest로 연결 
+	// 이 연산 전까진 ptrHead가 계속 반전 시작 노드(현재 단계의 head = first 노드)를 가리키고 있음
+	// -> 이 연산으로 ptrHead가 반전이 끝난 후 원래의 가장 마지막 노드(rest)를 가리키게 해서 완벽하게 반전
+	*ptrHead = rest;
 }
 
 //////////////////////////////////////////////////////////////////////////////////
