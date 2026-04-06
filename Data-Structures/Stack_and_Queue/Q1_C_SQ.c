@@ -132,7 +132,20 @@ void createQueueFromLinkedList(LinkedList *ll, Queue *q)
 
 void removeOddValues(Queue *q)
 {
-	dequeue(q);
+	int count = q->ll.size;
+	
+	for(int i = 0; i < count; i++)
+	{
+		// 일단 값 하나 무조건 뺌
+		int item = dequeue(q);
+
+		// 뺀 값이 짝수라면
+		if((item % 2) == 0)
+		{
+			// 그냥 다시 넣어 줌
+			enqueue(q, item);
+		}
+	}
 }
 
 //////////////////////////////////////////////////////////////////////////////////
