@@ -110,15 +110,58 @@ int main()
 
 
 //////////////////////////////////////////////////////////////////////////////////
-
+// 연결 리스트의 데이터를 순서대로 스택에 넣기
 void createStackFromLinkedList(LinkedList *ll, Stack *s)
 {
-    /* add your code here */
+	ListNode* cur = ll->head;
+
+	// 함수 시작 시 스택이 안 비어 있으면 무조건 완전히 비우고 시작
+	removeAllItemsFromStack(s);
+
+	// 스택 Top에 리스트의 마지막 값 위치
+	while(cur != NULL)
+	{
+		push(s, cur->item);
+
+		cur = cur->next;
+	}
 }
 
+// 짝수를 제거한 후의 스택: s.ll
 void removeEvenValues(Stack *s)
 {
-	/* add your code here */
+	// 큐와는 다르게 무조건 삭제했다가 다시 추가할 경우 순서가 뒤집힘
+	// -> 뺴지 않을 값을 저장해 둘 보조 스택 필요 
+	Stack tmp;
+
+	tmp.ll.head = NULL;
+	tmp.ll.size = 0;
+
+	int count = s->ll.size;
+
+	for(int i = 0; i < count; i++)
+	{
+		// 일단 뻄
+		int item = pop(s);
+
+		// 뺀 값이 홀수인지 아닌지
+		if ((item % 2) != 0 )
+		{
+			// 홀수면 tmp 스택에 넣기
+			push(&tmp, item);
+		}
+	}
+
+	// tmp 스택이 비워지기 전까지
+	while(!isEmptyStack(&tmp))
+	{
+		// tmp 스택에 있던 값을 꺼내고
+		int item = pop(&tmp);
+
+		// 다시 s 스택에 넣기 
+		push(s, item);
+	}
+	
 }
 
 //////////////////////////////////////////////////////////////////////////////////
