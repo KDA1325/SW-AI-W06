@@ -103,7 +103,42 @@ int main()
 
 int isStackPairwiseConsecutive(Stack *s)
 {
-  /* add your code here */
+	int size = s->ll.size;
+
+	if((size % 2) != 0)
+	{
+		return 0;
+	}
+
+	// 스택이니까 하나씩 빼고 넣기만 가능함
+	// 스택이 비어있지 않을 때만 순회하도록 하기
+	while(!isEmptyStack(s))
+	{
+		// 그럼 하나를 pop
+		int tmp = pop(s);
+
+		// 그다음 하나를 또 pop
+		int tmp_next = pop(s);
+		
+		// pop한 값 두 개를
+		// tmp - 1 == tmp_next || tmp + 1 == tmp_next로 연속된 값인지 확인
+		if(tmp - 1 == tmp_next || tmp + 1 == tmp_next)
+		{
+			// 맞다고 pop한 두 값 다시 push하면 안 됨!!
+			// push하면 결국 다음 번에 이미 비교한 값 또 비교하게 됨 
+			// push(s, tmp);
+			// push(s, tmp_next);
+			continue;
+		}
+		// 아니면 바로 0 리턴해
+		else
+		{
+			return 0;
+		}
+	}
+
+	// for문 다 돌 동안 return 0; 안 됐으면 return 1;
+	return 1;
 }
 
 //////////////////////////////////////////////////////////////////////////////////
